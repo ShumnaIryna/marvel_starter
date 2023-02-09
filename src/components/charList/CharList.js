@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 
 import Spinner from '../spinner/Spinner';
@@ -9,12 +9,12 @@ import './charList.scss';
 const CharList = (props) => {
 
     const [charList, setCharList] = useState([]);
-    const [newItemLoading, setNewItemLoading] = useState([false]);
+    const [newItemLoading, setNewItemLoading] = useState(false);
     const [offset, setOffset] = useState(210);
     const [charEnded, setCharEnded] = useState(false);
 
 
-    const {loading,error, getAllCharacters} = useMarvelService();
+    const {loading, error, getAllCharacters} = useMarvelService();
 
     useEffect(() => {
         onRequest(offset, true);
@@ -30,7 +30,7 @@ const CharList = (props) => {
 
     const onCharListLoaded = (newCharList) => {
         let ended = false;
-        if(newCharList.length < 9) {
+        if (newCharList.length < 9) {
             ended = true;
         }
 
@@ -73,7 +73,7 @@ const CharList = (props) => {
                     ref={el => itemRefs.current[i] = el}
                     key={item.id}
                     onClick={() => {
-                        props.onCharSelected(item.id)
+                        props.onCharSelected(item.id);
                         focusOnItem(i);
                         }}
                     onKeyPress={(e) => {
@@ -108,10 +108,10 @@ const CharList = (props) => {
             {spinner}
             {items}
             <button 
-            className="button button__main button__long"
-            disabled={newItemLoading}
-            style={{'display': charEnded ? 'none' : 'block'}}
-            onClick={() => onRequest(offset)}>
+                className="button button__main button__long"
+                disabled={newItemLoading}
+                style={{'display': charEnded ? 'none' : 'block'}}
+                onClick={() => onRequest(offset)}>
                 <div className="inner">load more</div>
             </button>
         </div>
